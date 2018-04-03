@@ -1,0 +1,34 @@
+$min-media: 55em;
+
+// let Sass take care of all of the placement of our colored grid cells. Nobody has time for that. Each list represents a row. Each value in the row is the column where the cell should start.
+$cell-rows: (
+   (1, 2, 3, 4, 5, 7),
+   (1, 3, 4, 5),
+   (1, 2, 3, 4, 5, 6, 7),
+   (1, 2, 4, 5, 6),
+   (2, 3, 4, 5, 6, 7),
+   (2, 3, 4, 6, 7)
+);
+
+// keep track of which cell we're on so we can reference it with our :nth-child-selector
+
+$nth-cell: 0;
+
+@each $row in $cell-rows {
+  // + 1  since our title is in the first row; cells start in the second
+  $row-start: index($cell-rows, $row) + 1;
+  // cells per row
+  $cells: length($row);
+
+  @for $cell from 1 through $cells {
+    // increment which cell we're on
+    $nth-cell: $nth-cell + 1;
+    // which column this cell should start in
+    $col-start: nth($row, $cell);
+
+    .cell:nth-of-type(#{$nth-cell}) {
+      grid-column: #{$col-start} / span 1;
+      grid-row: #{$row-start} / span 1;
+    }
+  }
+}

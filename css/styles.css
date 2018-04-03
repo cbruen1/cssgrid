@@ -1,0 +1,93 @@
+@font-face {
+  font-family: Lintel;
+  src: url(Lintel-Regular.ttf);
+  font-weight:400;
+} 
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+body {
+  /* width: 100%;
+  height: 100%; */
+  font-family: "Lintel", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background-color: #fff;
+  color: #444;
+}
+
+h1, p {
+  margin: 0 0 1em 0;
+}
+
+.wrapper {
+  /* max-width: 940px; */
+  margin: 0 10px;
+  display: grid;
+  grid-gap: 1px;
+  /* Test */
+  /* grid-template-rows: auto; */
+}
+
+.wrapper > * {
+  background-color: darkgray;
+  color: #fff;
+  padding: 20px;
+  font-size: 150%;
+  /* needed for the floated layout*/
+  margin-bottom: 10px;
+}
+
+nav {
+  text-align: center;
+  background: whitesmoke;
+  /* background-color: whitesmoke; */
+  /* position: fixed; */
+  /* top: 0; */
+  width: 100%;
+  /*z-index: 100;*/
+  color: darkgrey;
+}
+nav a {
+  display: inline-block;
+  padding: 15px 20px;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: darkgrey;
+}
+
+@media screen and (min-width: 500px) {
+
+  /* no grid support? */
+  .wrapper {
+    margin: 0 auto;
+    grid-template-columns: 1fr 3fr;
+  }
+
+  .sidebar {
+    float: left;
+    width: 19.1489%;
+  }
+
+  .content {
+    float: right;
+    width: 79.7872%;
+  }
+  
+  /* .header, .footer { */
+  .header, nav, .footer {
+    grid-column: 1 / -1;
+    /* needed for the floated layout */
+    clear: both;
+  }
+
+}
+
+/* We need to set the widths used on floated items back to auto, and remove the bottom margin as when we have grid we have gaps. */
+@supports (display: grid) {
+  .wrapper > * {
+    width: auto;
+    margin: 0;
+  }
+}
